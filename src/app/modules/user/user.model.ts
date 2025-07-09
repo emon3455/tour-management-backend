@@ -36,4 +36,4 @@ const userSchema = new Schema<IUser>({
     versionKey: false
 })
 
-const User = model<IUser>("User", userSchema)
+export const User = model<IUser>("User", userSchema)
