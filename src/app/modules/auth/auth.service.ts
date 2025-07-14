@@ -2,6 +2,9 @@ import AppError from "../../errorHelpers/AppError";
 import { User } from "../user/user.model";
 import httpStatus from "http-status-codes";
 import bcryptjs from "bcryptjs"
+import jwt from "jsonwebtoken"; 
+import { generateToken } from "../../utils/jwt";
+import { envVariable } from "../../config/env";
 
 const credentialsLogin = async (payload: any) => {
     const { email, password } = payload;
@@ -17,8 +20,15 @@ const credentialsLogin = async (payload: any) => {
     if (!isPasswordMatched) {
         throw new AppError(httpStatus.BAD_REQUEST, "Invalid Password");
     } else {
+        const jwtPayload = {
+            userId: isUserExist._id,
+            email: isUserExist.email,
+            role: isUserExist.role,
+        }
+        const token = generateToken(jwtPayload, envVariable.JWT_ACCESS_SECRET, envVariable.JWT_ACCESS_EXPIRES )
+
         const { password, ...rest } = isUserExist;
-        return rest
+        return {...rest, token}
     }
 }
 
