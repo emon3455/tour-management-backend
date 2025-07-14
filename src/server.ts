@@ -2,6 +2,7 @@ import http from "http";
 import mongoose from "mongoose";
 import app from "./app";
 import { envVariable } from "./app/config/env";
+import { seedSuperAdmin } from "./app/utils/seedSuperAdmin";
 
 let server: http.Server;
 
@@ -16,36 +17,40 @@ const startServer = async () => {
         console.log("Error:", error);
     }
 };
-startServer();
 
-process.on("uncaughtException",(error)=>{
+(async () => {
+    await startServer();
+    await seedSuperAdmin();
+})()
+
+process.on("uncaughtException", (error) => {
     console.log("Uncaught Exception Detected..!, Server shutting Down. ", error);
-    
-    if(server){
+
+    if (server) {
         process.exit(1);
     }
     process.exit(1);
 })
-process.on("unhandledRejection",(error)=>{
+process.on("unhandledRejection", (error) => {
     console.log("Unhandle Rejection Detected..!, Server shutting Down. ", error);
-    
-    if(server){
+
+    if (server) {
         process.exit(1);
     }
     process.exit(1);
 })
-process.on("SIGINT",(error)=>{
+process.on("SIGINT", (error) => {
     console.log("SIGINT Detected..!, Server shutting Down. ", error);
-    
-    if(server){
+
+    if (server) {
         process.exit(1);
     }
     process.exit(1);
 })
-process.on("SIGTERM",(error)=>{
+process.on("SIGTERM", (error) => {
     console.log("SIGTERM Detected..!, Server shutting Down. ", error);
-    
-    if(server){
+
+    if (server) {
         process.exit(1);
     }
     process.exit(1);
