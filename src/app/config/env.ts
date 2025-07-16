@@ -24,6 +24,7 @@ const loadEnvVariable = (): EnvConfig => {
         }
     })
 
+    
     return {
         DB_URL: process.env.DB_URL as string,
         PORT: process.env.PORT as string,
