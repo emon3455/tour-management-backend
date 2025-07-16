@@ -19,6 +19,7 @@ export interface IAuthProvider{
 }
 
 export interface IUser {
+    _id ?: Types.ObjectId; 
     name: string;
     email: string;
     password ?: string;
