@@ -1,8 +1,9 @@
-import { NextFunction, Response, Request } from "express";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Response, Request } from "express";
 import { envVariable } from "../config/env";
 import AppError from "../errorHelpers/AppError";
 
-export const globalErrorHandler = (error: any, req: Request, res: Response, next: NextFunction) => {
+export const globalErrorHandler = (error: any, req: Request, res: Response) => {
     let status = 500;
     let message = `Something Went Wrong!`;
 
