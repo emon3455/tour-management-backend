@@ -2,8 +2,8 @@ import dotenv from "dotenv";
 dotenv.config();
 
 interface EnvConfig {
-    PORT: String
-    DB_URL: String
+    PORT: string
+    DB_URL: string
     NODE_ENV: "development" | "production"
     JWT_ACCESS_SECRET: string
     JWT_ACCESS_EXPIRES: string
