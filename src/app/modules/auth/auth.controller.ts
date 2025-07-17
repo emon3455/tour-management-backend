@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import catchAsync from "../../utils/catchAsync";
 import { AuthServices } from "./auth.service";
 import { sendResponse } from "../../utils/sendResponse";
@@ -7,7 +7,7 @@ import AppError from "../../errorHelpers/AppError";
 import { setAuthCookie } from "../../utils/setCookie";
 import { JwtPayload } from "jsonwebtoken";
 
-const credentialsLogin = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+const credentialsLogin = catchAsync(async (req: Request, res: Response) => {
     const user = await AuthServices.credentialsLogin(req.body);
 
     setAuthCookie(res, user);
@@ -20,7 +20,7 @@ const credentialsLogin = catchAsync(async (req: Request, res: Response, next: Ne
     })
 })
 
-const getNewAccessToken = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+const getNewAccessToken = catchAsync(async (req: Request, res: Response) => {
     const refreshToken = req.cookies.refreshToken;
     if (!refreshToken) {
         throw new AppError(httpStatus.BAD_REQUEST, "No refresh token recieved from cookies")
@@ -37,7 +37,7 @@ const getNewAccessToken = catchAsync(async (req: Request, res: Response, next: N
     })
 })
 
-const logout = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+const logout = catchAsync(async (req: Request, res: Response) => {
 
     res.clearCookie("accessToken", {
         httpOnly: true,
@@ -58,7 +58,7 @@ const logout = catchAsync(async (req: Request, res: Response, next: NextFunction
     })
 })
 
-const resetPassword = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+const resetPassword = catchAsync(async (req: Request, res: Response) => {
 
     const newPassword = req.body.newPassword;
     const oldPassword = req.body.oldPassword;
