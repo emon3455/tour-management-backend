@@ -1,0 +1,149 @@
+commit 1f05aa0c4e1e763dc66a1c4500015cbef4a21e91
+Author: emon3455 <emon.mhk69@gmail.com>
+Date:   Wed Jul 16 17:57:39 2025 +0600
+
+    fixed
+
+commit 8cbb138f1f1049513cb59d8b23dfcb50a60faa30
+Author: emon3455 <emon.mhk69@gmail.com>
+Date:   Thu Jul 17 12:43:32 2025 +0600
+
+    removed unused
+
+commit 69c33f2bae885870f4e602a07ac6972c54c03d4a
+Author: Emon <emon.mhk69@gmail.com>
+Date:   Thu Jul 17 00:42:45 2025 +0600
+
+    necessary modfuled installed
+
+commit 8349093197925a24b7df900a482d67661f10a2bb
+Author: Emon <emon.mhk69@gmail.com>
+Date:   Wed Jul 16 21:51:10 2025 +0600
+
+    console logs re,movede
+
+commit 6ea9ff74a8c1fa5d74679538731c03c86ec309a9
+Author: Emon <emon.mhk69@gmail.com>
+Date:   Wed Jul 16 21:50:25 2025 +0600
+
+    removed unused things
+
+commit 3737ea84cb32d0e2c3c1da39a068314fade0aa2c
+Author: emon3455 <emon.mhk69@gmail.com>
+Date:   Wed Jul 16 18:00:38 2025 +0600
+
+    fixed
+
+commit 317691ce2148616d0f5106f75c37264135a45291
+Author: emon3455 <emon.mhk69@gmail.com>
+Date:   Wed Jul 16 17:57:39 2025 +0600
+
+    fixed
+
+commit 189fc64905031bef82b426b51359b51162a7353c
+Author: emon3455 <emon.mhk69@gmail.com>
+Date:   Wed Jul 16 17:55:18 2025 +0600
+
+    all iissues resolved
+
+commit 02585cc34777cb98c72aec5cca856020f4e360d5
+Author: emon3455 <emon.mhk69@gmail.com>
+Date:   Wed Jul 16 17:54:23 2025 +0600
+
+    fixed
+
+commit 84ce9a857eb8cb19657d007ac19b1180f4ce000d
+Author: emon3455 <emon.mhk69@gmail.com>
+Date:   Wed Jul 16 17:53:32 2025 +0600
+
+    oauth started
+
+commit 0e54402401463810ee570c061f9fa836d9029cde
+Author: emon3455 <emon.mhk69@gmail.com>
+Date:   Wed Jul 16 16:02:30 2025 +0600
+
+    referesh token done along with logout
+
+commit bc4b7173a9875d4d56ed3c3883d3d44b07f55cca
+Author: Emon <emon.mhk69@gmail.com>
+Date:   Tue Jul 15 00:15:46 2025 +0600
+
+    module finish
+
+commit 409be5cb946d1aa949d0699dcf2dca5be461262a
+Author: emon3455 <emon.mhk69@gmail.com>
+Date:   Mon Jul 14 18:06:00 2025 +0600
+
+    update user done
+
+commit 29b094efc2532854e2442b6bfcb864bcf4076761
+Author: emon3455 <emon.mhk69@gmail.com>
+Date:   Mon Jul 14 17:47:44 2025 +0600
+
+    super admin seed done
+
+commit fc62c2e6ee9d8c1929776c1bac6c4679df6dd55d
+Author: emon3455 <emon.mhk69@gmail.com>
+Date:   Mon Jul 14 17:41:17 2025 +0600
+
+    middlewear setup done
+
+commit 7cf43e1b0215b74fcb486158fc1ad91c6d5422a3
+Author: emon3455 <emon.mhk69@gmail.com>
+Date:   Mon Jul 14 14:33:36 2025 +0600
+
+    login done in auth
+
+commit c23e6f3262f2e53ccd81fd0c5712479271074de3
+Author: emon3455 <emon.mhk69@gmail.com>
+Date:   Sun Jul 13 19:08:38 2025 +0600
+
+    video 2-3 done
+
+commit eee6b6c22dff899937d0bcf40b891ec9e728c1b9
+Author: emon3455 <emon.mhk69@gmail.com>
+Date:   Thu Jul 10 11:46:31 2025 +0600
+
+    send response utility done
+
+commit 5212611ad4e64717b66738ba98905a5c0f3a9876
+Author: emon3455 <emon.mhk69@gmail.com>
+Date:   Thu Jul 10 11:24:05 2025 +0600
+
+    catch async globally done
+
+commit 12eb756caff5e2e97657b7a246ae45dfc8645438
+Author: emon3455 <emon.mhk69@gmail.com>
+Date:   Thu Jul 10 11:14:37 2025 +0600
+
+    not found route handler addded
+
+commit b509da734ba05285b2b410e86761259600c7903a
+Author: emon3455 <emon.mhk69@gmail.com>
+Date:   Thu Jul 10 11:02:08 2025 +0600
+
+    Basinc Global error handler done
+
+commit 3f7bf32a510cb118386af9f5e36d9ba54f1899e7
+Author: emon3455 <emon.mhk69@gmail.com>
+Date:   Wed Jul 9 16:57:46 2025 +0600
+
+    global error handler setup done
+
+commit 190c64a1ba3ae910724dc2c171d3841179ef4f4e
+Author: emon3455 <emon.mhk69@gmail.com>
+Date:   Wed Jul 9 16:32:40 2025 +0600
+
+    routes setup done for the user
+
+commit f14cee6bb71defa39c676df6b1cf115afec21da7
+Author: emon3455 <emon.mhk69@gmail.com>
+Date:   Wed Jul 9 12:51:23 2025 +0600
+
+    user model and interface done
+
+commit 5cc3b0cea2fdea421a98775f6c45d43387ff085e
+Author: emon3455 <emon.mhk69@gmail.com>
+Date:   Mon Jul 7 16:47:32 2025 +0600
+
+    initial setup done

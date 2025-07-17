@@ -1,0 +1,25 @@
+1f05aa0 HEAD@{0}: rebase (pick): fixed
+8cbb138 HEAD@{1}: commit: removed unused
+69c33f2 HEAD@{2}: pull: Fast-forward
+3737ea8 HEAD@{3}: commit: fixed
+317691c HEAD@{4}: reset: moving to HEAD
+317691c HEAD@{5}: commit: fixed
+189fc64 HEAD@{6}: commit: all iissues resolved
+02585cc HEAD@{7}: commit: fixed
+84ce9a8 HEAD@{8}: commit: oauth started
+0e54402 HEAD@{9}: commit: referesh token done along with logout
+bc4b717 HEAD@{10}: pull: Fast-forward
+409be5c HEAD@{11}: commit: update user done
+29b094e HEAD@{12}: commit: super admin seed done
+fc62c2e HEAD@{13}: commit: middlewear setup done
+7cf43e1 HEAD@{14}: commit: login done in auth
+c23e6f3 HEAD@{15}: commit: video 2-3 done
+eee6b6c HEAD@{16}: commit: send response utility done
+5212611 HEAD@{17}: commit: catch async globally done
+12eb756 HEAD@{18}: commit: not found route handler addded
+b509da7 HEAD@{19}: commit: Basinc Global error handler done
+3f7bf32 HEAD@{20}: commit: global error handler setup done
+190c64a HEAD@{21}: commit: routes setup done for the user
+f14cee6 HEAD@{22}: commit: user model and interface done
+5cc3b0c HEAD@{23}: Branch: renamed refs/heads/master to refs/heads/main
+5cc3b0c HEAD@{25}: commit (initial): initial setup done
