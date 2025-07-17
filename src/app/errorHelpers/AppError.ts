@@ -1,18 +1,18 @@
-class AppError extends Error{
+
+
+class AppError extends Error {
     public statusCode: number;
 
-    constructor(statusCode: number, message: string, stack=''){
-        super(message)
+    constructor(statusCode: number, message: string, stack = '') {
+        super(message) // throw new Error("Something went wrong")
+        this.statusCode = statusCode
 
-        this.statusCode = statusCode;
-
-        if(stack){
+        if (stack) {
             this.stack = stack
-        }else{
+        } else {
             Error.captureStackTrace(this, this.constructor)
         }
-
     }
 }
 
-export default AppError;
+export default AppError

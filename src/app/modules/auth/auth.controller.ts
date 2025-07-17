@@ -1,27 +1,52 @@
-import { Request, Response } from "express";
-import catchAsync from "../../utils/catchAsync";
-import { AuthServices } from "./auth.service";
-import { sendResponse } from "../../utils/sendResponse";
-import httpStatus from "http-status-codes";
-import AppError from "../../errorHelpers/AppError";
-import { setAuthCookie } from "../../utils/setCookie";
-import { JwtPayload } from "jsonwebtoken";
-import { createUserTokens } from "../../utils/userToken";
-import { envVariable } from "../../config/env";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { NextFunction, Request, Response } from "express"
+import httpStatus from "http-status-codes"
+import { JwtPayload } from "jsonwebtoken"
+import passport from "passport"
+import { envVars } from "../../config/env"
+import AppError from "../../errorHelpers/AppError"
+import { catchAsync } from "../../utils/catchAsync"
+import { sendResponse } from "../../utils/sendResponse"
+import { setAuthCookie } from "../../utils/setCookie"
+import { createUserTokens } from "../../utils/userTokens"
+import { AuthServices } from "./auth.service"
 
-const credentialsLogin = catchAsync(async (req: Request, res: Response) => {
-    const user = await AuthServices.credentialsLogin(req.body);
+const credentialsLogin = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    // const loginInfo = await AuthServices.credentialsLogin(req.body)
 
-    setAuthCookie(res, user);
+    passport.authenticate("local", async (err: any, user: any, info: any) => {
 
-    sendResponse(res,{
-        success: true,
-        status: httpStatus.OK,
-        data: user,
-        message: "User Loged In Successfully",
-    })
+        if (err) {
+            return next(new AppError(401, err))
+        }
+
+        if (!user) {
+            return next(new AppError(401, info.message))
+        }
+
+        const userTokens = await createUserTokens(user)
+
+        // eslint-disable-next-line no-unused-vars
+        const { password: pass, ...rest } = user.toObject()
+
+
+        setAuthCookie(res, userTokens)
+
+        sendResponse(res, {
+            success: true,
+            statusCode: httpStatus.OK,
+            message: "User Logged In Successfully",
+            data: {
+                accessToken: userTokens.accessToken,
+                refreshToken: userTokens.refreshToken,
+                user: rest
+
+            },
+        })
+    })(req, res, next)
+
 })
-
 const getNewAccessToken = catchAsync(async (req: Request, res: Response) => {
     const refreshToken = req.cookies.refreshToken;
     if (!refreshToken) {
@@ -33,12 +58,11 @@ const getNewAccessToken = catchAsync(async (req: Request, res: Response) => {
 
     sendResponse(res, {
         success: true,
-        status: httpStatus.OK,
+        statusCode: httpStatus.OK,
         message: "New Access Token Retrived Successfully",
         data: tokenInfo,
     })
 })
-
 const logout = catchAsync(async (req: Request, res: Response) => {
 
     res.clearCookie("accessToken", {
@@ -54,12 +78,11 @@ const logout = catchAsync(async (req: Request, res: Response) => {
 
     sendResponse(res, {
         success: true,
-        status: httpStatus.OK,
+        statusCode: httpStatus.OK,
         message: "User Logged Out Successfully",
         data: null,
     })
 })
-
 const resetPassword = catchAsync(async (req: Request, res: Response) => {
 
     const newPassword = req.body.newPassword;
@@ -70,12 +93,11 @@ const resetPassword = catchAsync(async (req: Request, res: Response) => {
 
     sendResponse(res, {
         success: true,
-        status: httpStatus.OK,
+        statusCode: httpStatus.OK,
         message: "Password Changed Successfully",
         data: null,
     })
 })
-
 const googleCallbackController = catchAsync(async (req: Request, res: Response) => {
 
     let redirectTo = req.query.state ? req.query.state as string : ""
@@ -85,8 +107,6 @@ const googleCallbackController = catchAsync(async (req: Request, res: Response) 
     }
 
     const user = req.user;
-    console.log("user: ",user);
-    
 
     if (!user) {
         throw new AppError(httpStatus.NOT_FOUND, "User Not Found")
@@ -96,17 +116,10 @@ const googleCallbackController = catchAsync(async (req: Request, res: Response) 
 
     setAuthCookie(res, tokenInfo)
 
-    // sendResponse(res, {
-    //     success: true,
-    //     statusCode: httpStatus.OK,
-    //     message: "Password Changed Successfully",
-    //     data: null,
-    // })
-
-    res.redirect(`${envVariable.FRONTEND_URL}/${redirectTo}`)
+    res.redirect(`${envVars.FRONTEND_URL}/${redirectTo}`)
 })
 
-export const AuthController = {
+export const AuthControllers = {
     credentialsLogin,
     getNewAccessToken,
     logout,

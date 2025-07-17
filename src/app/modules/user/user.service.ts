@@ -1,29 +1,34 @@
+import bcryptjs from "bcryptjs";
+import httpStatus from "http-status-codes";
+import { JwtPayload } from "jsonwebtoken";
+import { envVars } from "../../config/env";
 import AppError from "../../errorHelpers/AppError";
 import { IAuthProvider, IUser, Role } from "./user.interface";
 import { User } from "./user.model";
-import httpStatus from "http-status-codes";
-import bcryptjs from "bcryptjs"
-import { envVariable } from "../../config/env";
-import { JwtPayload } from "jsonwebtoken";
 
 const createUser = async (payload: Partial<IUser>) => {
-
     const { email, password, ...rest } = payload;
 
-    const isUserExist: any = await User.find({ email });
+    const isUserExist = await User.findOne({ email })
 
-    if (isUserExist?.email) {
-        throw new AppError(httpStatus.BAD_REQUEST, "User Already Exist");
+    if (isUserExist) {
+        throw new AppError(httpStatus.BAD_REQUEST, "User Already Exist")
     }
 
-    const hashedPassword = await bcryptjs.hash(password as string, Number(envVariable.BCRYPT_SALT_ROUND))
-
+    const hashedPassword = await bcryptjs.hash(password as string, Number(envVars.BCRYPT_SALT_ROUND))
 
     const authProvider: IAuthProvider = { provider: "credentials", providerId: email as string }
 
-    const user = await User.create({ email, auths: [authProvider], password: hashedPassword, ...rest });
 
-    return user;
+    const user = await User.create({
+        email,
+        password: hashedPassword,
+        auths: [authProvider],
+        ...rest
+    })
+
+    return user
+
 }
 
 const updateUser = async (userId: string, payload: Partial<IUser>, decodedToken: JwtPayload) => {
@@ -60,7 +65,7 @@ const updateUser = async (userId: string, payload: Partial<IUser>, decodedToken:
     }
 
     if (payload.password) {
-        payload.password = await bcryptjs.hash(payload.password, Number(envVariable.BCRYPT_SALT_ROUND))
+        payload.password = await bcryptjs.hash(payload.password, envVars.BCRYPT_SALT_ROUND)
     }
 
     const newUpdatedUser = await User.findByIdAndUpdate(userId, payload, { new: true, runValidators: true })
@@ -68,13 +73,20 @@ const updateUser = async (userId: string, payload: Partial<IUser>, decodedToken:
     return newUpdatedUser
 }
 
-const getAllUser = async () => {
-    const users = await User.find();
-    return users;
-}
+
+const getAllUsers = async () => {
+    const users = await User.find({});
+    const totalUsers = await User.countDocuments();
+    return {
+        data: users,
+        meta: {
+            total: totalUsers
+        }
+    }
+};
 
 export const UserServices = {
     createUser,
-    getAllUser,
+    getAllUsers,
     updateUser
 }

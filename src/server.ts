@@ -1,57 +1,91 @@
-import http from "http";
+/* eslint-disable no-console */
+import { Server } from "http";
 import mongoose from "mongoose";
 import app from "./app";
-import { envVariable } from "./app/config/env";
+import { envVars } from "./app/config/env";
 import { seedSuperAdmin } from "./app/utils/seedSuperAdmin";
 
-let server: http.Server;
+let server: Server;
+
 
 const startServer = async () => {
     try {
-        await mongoose.connect(envVariable.DB_URL as string);
-        console.log("MongoDB Connected");
-        server = app.listen(envVariable.PORT, () => {
-            console.log(`Server is listening to port ${envVariable.PORT}`);
+        await mongoose.connect(envVars.DB_URL)
+
+        console.log("Connected to DB!!");
+
+        server = app.listen(envVars.PORT, () => {
+            console.log(`Server is listening to port ${envVars.PORT}`);
         });
     } catch (error) {
-        console.log("Error:", error);
+        console.log(error);
     }
-};
+}
 
 (async () => {
-    await startServer();
-    await seedSuperAdmin();
+    await startServer()
+    await seedSuperAdmin()
 })()
 
-process.on("uncaughtException", (error) => {
-    console.log("Uncaught Exception Detected..!, Server shutting Down. ", error);
+process.on("SIGTERM", () => {
+    console.log("SIGTERM signal recieved... Server shutting down..");
 
     if (server) {
-        process.exit(1);
+        server.close(() => {
+            process.exit(1)
+        });
     }
-    process.exit(1);
+
+    process.exit(1)
 })
-process.on("unhandledRejection", (error) => {
-    console.log("Unhandle Rejection Detected..!, Server shutting Down. ", error);
+
+process.on("SIGINT", () => {
+    console.log("SIGINT signal recieved... Server shutting down..");
 
     if (server) {
-        process.exit(1);
+        server.close(() => {
+            process.exit(1)
+        });
     }
-    process.exit(1);
+
+    process.exit(1)
 })
-process.on("SIGINT", (error) => {
-    console.log("SIGINT Detected..!, Server shutting Down. ", error);
+
+
+process.on("unhandledRejection", (err) => {
+    console.log("Unhandled Rejecttion detected... Server shutting down..", err);
 
     if (server) {
-        process.exit(1);
+        server.close(() => {
+            process.exit(1)
+        });
     }
-    process.exit(1);
+
+    process.exit(1)
 })
-process.on("SIGTERM", (error) => {
-    console.log("SIGTERM Detected..!, Server shutting Down. ", error);
+
+process.on("uncaughtException", (err) => {
+    console.log("Uncaught Exception detected... Server shutting down..", err);
 
     if (server) {
-        process.exit(1);
+        server.close(() => {
+            process.exit(1)
+        });
     }
-    process.exit(1);
+
+    process.exit(1)
 })
+
+// Unhandler rejection error
+// Promise.reject(new Error("I forgot to catch this promise"))
+
+// Uncaught Exception Error
+// throw new Error("I forgot to handle this local erro")
+
+
+/**
+ * unhandled rejection error
+ * uncaught rejection error
+ * signal termination sigterm
+ */
+

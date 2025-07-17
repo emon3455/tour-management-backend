@@ -4,20 +4,21 @@ interface TMeta {
     total: number
 }
 
-interface TResponse<T>{
+
+interface TResponse<T> {
+    statusCode: number;
     success: boolean;
-    status: number;
     message: string;
     data: T;
-    meta ?:TMeta;
+    meta?: TMeta
 }
 
-export const sendResponse = <T>(res:Response, data:TResponse<T>)=>{
-    res.status(data.status).json({
+export const sendResponse = <T>(res: Response, data: TResponse<T>) => {
+    res.status(data.statusCode).json({
+        statusCode: data.statusCode,
         success: data.success,
-        statusCode: data.status,
         message: data.message,
-        data: data.data,
-        meta: data.meta
+        meta: data.meta,
+        data: data.data
     })
 }
