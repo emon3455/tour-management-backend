@@ -39,15 +39,6 @@ const updateUser = async (userId: string, payload: Partial<IUser>, decodedToken:
         throw new AppError(httpStatus.NOT_FOUND, "User Not Found")
     }
 
-    /**
-     * email - can not update
-     * name, phone, password address
-     * password - re hashing
-     *  only admin superadmin - role, isDeleted...
-     * 
-     * promoting to superadmin - superadmin
-     */
-
     if (payload.role) {
         if (decodedToken.role === Role.USER || decodedToken.role === Role.GUIDE) {
             throw new AppError(httpStatus.FORBIDDEN, "You are not authorized");

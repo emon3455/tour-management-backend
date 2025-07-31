@@ -76,16 +76,3 @@ process.on("uncaughtException", (err) => {
     process.exit(1)
 })
 
-// Unhandler rejection error
-// Promise.reject(new Error("I forgot to catch this promise"))
-
-// Uncaught Exception Error
-// throw new Error("I forgot to handle this local erro")
-
-
-/**
- * unhandled rejection error
- * uncaught rejection error
- * signal termination sigterm
- */
-

@@ -13,7 +13,6 @@ import { createUserTokens } from "../../utils/userTokens"
 import { AuthServices } from "./auth.service"
 
 const credentialsLogin = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    // const loginInfo = await AuthServices.credentialsLogin(req.body)
 
     passport.authenticate("local", async (err: any, user: any, info: any) => {
 

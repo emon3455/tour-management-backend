@@ -61,10 +61,7 @@ export const updateUserZodSchema = z.object({
         "Phone number must be valid for Bangladesh. Format: +8801XXXXXXXXX or 01XXXXXXXXX",
     })
     .optional(),
-  role: z
-    // .enum(["ADMIN", "GUIDE", "USER", "SUPER_ADMIN"])
-    .enum(Object.values(Role) as [string])
-    .optional(),
+  role: z.enum(Object.values(Role) as [string]).optional(),
   isActive: z.enum(Object.values(IsActive) as [string]).optional(),
   isDeleted: z
     .boolean({ invalid_type_error: "isDeleted must be true or false" })
