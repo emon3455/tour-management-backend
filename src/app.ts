@@ -21,13 +21,18 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(cookieParser())
 app.use(express.json())
-app.use(cors())
+app.set("trust proxy", 1);
+app.use(express.urlencoded({ extended: true }))
+app.use(cors({
+    origin: envVars.FRONTEND_URL,
+    credentials: true
+}))
 
 app.use("/api/v1", router)
 
 app.get("/", (req: Request, res: Response) => {
     res.status(200).json({
-        message: "Welcome to Template System Backend"
+        message: "Welcome to Tour Management System Backend"
     })
 })
 
